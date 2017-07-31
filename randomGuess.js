@@ -44,11 +44,12 @@ var userGuess = document.getElementById("user-guess"),
                             displayDiv.innerHTML = "Your guess of " + userGuessNum + " is incorrect. The number is: " + myRanNum + "\n Your number of attempts: " + userAttempts;
                         }    
                     }
-
+                //calls randomNum() which processes user guess, compares it to randomly generated computer number and provides user with output    
                 checkUserGuessButton.addEventListener("click", function() {
                     randomNum();
                 });
 
+                //clears all output areas, reset variable counters to 0 and clears textboxes
                 clearGameButton.addEventListener("click", function() {
                     userGuess.value = ""; 
                     displayDiv.innerHTML = "";
