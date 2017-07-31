@@ -5,7 +5,8 @@ var userGuess = document.getElementById("user-guess"),
     userScoreDiv = document.getElementById("user-score-div"),
     lowerLimit = 1;
     upperLimit = 100,
-    userScore = 0; 
+    userScore = 0,
+    userAttempts = 0;
 
     //SCOPE OF APPLICATION
         //App will need to:
@@ -20,30 +21,29 @@ var userGuess = document.getElementById("user-guess"),
                 //keep track of their score and display it in the another div
 
 
-                //will generate a random number between 0 and 100, compare user guess to computers' guess and display results
+                //will generate a random number between 1 and 100, compare user guess to computers' guess and display results
                 var randomNum = function randomNum() {
                     var myRanNum = Math.floor(Math.random() * upperLimit) + 1;
                     var userGuessNum = parseInt(userGuess.value);
 
-                   if(userGuessNum < lowerLimit || userGuessNum > upperLimit) {
-                        userScoreDiv.innerHTML = "Your score is: " + userScore;
-                        displayDiv.innerHTML = "Please, only enter a number between 1 and 100";
-                    }
-                        else if(userGuessNum === myRanNum){
+                    if(userGuessNum < lowerLimit || userGuessNum > upperLimit) {
+                            userAttempts += 1;
+                            userScoreDiv.innerHTML = "Your score is: " + userScore + "\n" + "And your number of attempts: " + userAttempts;
+                            displayDiv.innerHTML = "Please, only enter a number between 1 and 100";
+                        }
+                        else if(userGuessNum === myRanNum) {
                             userScore += 10;
-                            userScoreDiv.innerHTML = "Your score is: " + userScore;
+                            userAttempts += 1;
+                            userScoreDiv.innerHTML = "Your score is: " + userScore + "\n" + "And your number of attempts: " + userAttempts;
                             displayDiv.innerHTML = myRanNum + " is a correct guess!";                        
                         }   
-                        else if(userGuessNum !== myRanNum){
-                            userScore -= 2;
-                            userScoreDiv.innerHTML = "Your score is: " + userScore;
-                            displayDiv.innerHTML = "Your guess of " + userGuessNum + " is incorrect. The number is: " + myRanNum;
-                        }    
                         else {
+                            userGuessNum !== myRanNum
+                            userAttempts += 1;
                             userScoreDiv.innerHTML = "Your score is: " + userScore;
-                            displayDiv.innerHTML = "Your guess was not a number. Please enter a number between 1 and 100";
-                        }
-                }
+                            displayDiv.innerHTML = "Your guess of " + userGuessNum + " is incorrect. The number is: " + myRanNum + "\n Your number of attempts: " + userAttempts;
+                        }    
+                    }
 
                 checkUserGuessButton.addEventListener("click", function() {
                     randomNum();
@@ -54,4 +54,5 @@ var userGuess = document.getElementById("user-guess"),
                     displayDiv.innerHTML = "";
                     userScoreDiv.innerHTML = "";        
                     userScore = 0;       
+                    userAttempts = 0;
                 });
